@@ -1,0 +1,48 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+datasource db {
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
+  referentialIntegrity = "prisma"
+}
+
+model User {
+  id              String  @id @default(cuid())
+  email           String  @unique
+  password        String
+  firstName       String
+  lastName        String
+  username        String  @unique
+  profileImageUrl String?
+  activationToken String? @unique @default(cuid())
+  player          Player?
+}
+
+model Player {
+  id          String @id @default(cuid())
+  elo         Int    @default(1000)
+  previousElo Int    @default(1000)
+  user        User   @relation(fields: [userId], references: [id])
+  userId      String @unique
+  gameWinner  Game[] @relation(name: "winner")
+  gameLoser   Game[] @relation(name: "loser")
+}
+
+model Game {
+  id       String   @id @default(cuid())
+  playedAt DateTime @default(now())
+  winner   Player[] @relation(name: "winner")
+  loser    Player[] @relation(name: "loser")
+  score    Score?
+}
+
+model Score {
+  id     String  @id @default(cuid())
+  winner Int
+  loser  Int
+  game   Game?   @relation(fields: [gameId], references: [id])
+  gameId String? @unique
+}

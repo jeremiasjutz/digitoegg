@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: 'Clash Grotesk';
+    src: url('/fonts/ClashGrotesk-Variable.woff2') format('woff2'),
+      url('/fonts/ClashGrotesk-Variable.woff') format('woff'),
+      url('/fonts/ClashGrotesk-Variable.ttf') format('truetype');
+    font-weight: 200 700;
+    font-display: swap;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'YoungSerif';
+    src: url('/fonts/YoungSerif-Regular.woff2') format('woff2'),
+      url('/fonts/YoungSerif-Regular.woff') format('woff'),
+      url('/fonts/YoungSerif-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-display: swap;
+    font-style: normal;
+  }
+  @keyframes spin-reverse {
+    to {
+      transform: rotate(-360deg);
+    }
+  }
+}
+
+@layer utilities {
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    -webkit-appearance: none;
+    @apply hidden;
+  }
+  .px-safe {
+    @apply pr-safe-right pl-safe-left;
+  }
+  .px-6-safe {
+    @apply pr-[calc(1.5rem+env(safe-area-inset-right))] pl-[calc(1.5rem+env(safe-area-inset-left))];
+  }
+  .pb-6-safe {
+    @apply pb-[calc(1.5rem+env(safe-area-inset-bottom))];
+  }
+  .pt-6-safe {
+    @apply pt-[calc(1.5rem+env(safe-area-inset-top))];
+  }
+  .pt-18-safe {
+    @apply pt-[calc(4.75rem+env(safe-area-inset-top))];
+  }
+  .pb-18-safe {
+    @apply pb-[calc(4.75rem+env(safe-area-inset-bottom))];
+  }
+  .mt-18-safe {
+    @apply mt-[calc(4.75rem+env(safe-area-inset-top))];
+  }
+}
