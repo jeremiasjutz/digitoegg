@@ -25,7 +25,7 @@ interface PlayerSelectProps {
   className?: string;
 }
 
-const pointsArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+// const pointsArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 export default function PlayerSelect({
   players,
@@ -44,11 +44,11 @@ export default function PlayerSelect({
       ),
     [query, players]
   );
-  const [points, setPoints] = useState(pointsArray[0]);
+  // const [points, setPoints] = useState(pointsArray[0]);
   return (
     <fieldset>
       <p className="mb-1 text-lg font-medium">Spieler:innen {party}</p>
-      <div className="grid gap-2 sm:grid-cols-5 sm:gap-4">
+      <div className="flex gap-2 sm:gap-4">
         <Combobox
           value={activePlayers}
           multiple
@@ -62,7 +62,7 @@ export default function PlayerSelect({
           }}
           name={`players${party}`}
           as="div"
-          className="flex-1 sm:col-span-4"
+          className="flex-1"
         >
           <Combobox.Label className="sr-only">
             Spieler:innen {party}
@@ -191,7 +191,7 @@ export default function PlayerSelect({
             </div>
           </div>
         </Combobox>
-        <label>
+        <label className="col-span-2">
           <span className="sr-only">Punkte {party}</span>
           <Input
             required
