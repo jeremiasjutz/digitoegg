@@ -79,6 +79,9 @@ export const action: ActionFunction = async ({ request }) => {
                   username,
                   firstName,
                   lastName,
+                  ...(process.env.NODE_ENV === 'development'
+                    ? { activationToken: null }
+                    : {}),
                 },
               },
             },
@@ -87,12 +90,15 @@ export const action: ActionFunction = async ({ request }) => {
             },
           });
 
-          await sendMail({
-            to: email,
-            activationUrl: `${url.origin}/activate/${player.user.activationToken}`,
-          });
-
-          return redirect('/activate');
+          if (process.env.NODE_ENV === 'production') {
+            await sendMail({
+              to: email,
+              activationUrl: `${url.origin}/activate/${player.user.activationToken}`,
+            });
+            return redirect('/activate');
+          } else {
+            return redirect('/login');
+          }
         } catch (e) {
           if (e instanceof Prisma.PrismaClientKnownRequestError) {
             if (e.code === 'P2002') {
