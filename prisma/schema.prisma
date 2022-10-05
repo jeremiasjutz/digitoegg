@@ -27,15 +27,15 @@ model Player {
   previousElo Int    @default(1000)
   user        User   @relation(fields: [userId], references: [id])
   userId      String @unique
-  gameWinner  Game[] @relation(name: "winner")
-  gameLoser   Game[] @relation(name: "loser")
+  gameWinner  Game[] @relation("winner")
+  gameLoser   Game[] @relation("loser")
 }
 
 model Game {
   id       String   @id @default(cuid())
   playedAt DateTime @default(now())
-  winner   Player[] @relation(name: "winner")
-  loser    Player[] @relation(name: "loser")
+  winner   Player[] @relation("winner")
+  loser    Player[] @relation("loser")
   score    Score?
 }
 
