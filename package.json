@@ -7,7 +7,8 @@
     "build:css": "tailwindcss -m -i ./styles/app.css -o app/styles/app.css",
     "dev": "concurrently \"pnpm run dev:css\" \"remix dev\"",
     "dev:css": "tailwindcss -w -i ./styles/app.css -o app/styles/app.css",
-    "generate": "pnpx pwa-asset-generator public/logo.svg public/assets/manifest -m public/site.webmanifest --padding 'calc(50vh - 25%) calc(50vw - 25%)' -b '#171717' -q 100"
+    "generate": "pnpx pwa-asset-generator public/logo.svg public/assets/manifest -m public/site.webmanifest --padding 'calc(50vh - 25%) calc(50vw - 25%)' -b '#171717' -q 100",
+    "start": "remix-serve build"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.3",
